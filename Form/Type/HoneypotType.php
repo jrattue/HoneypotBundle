@@ -3,16 +3,14 @@
 namespace Rattler\HoneypotBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraint;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Blank;
 
 class HoneypotType extends AbstractType{
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'required' => false,
@@ -24,7 +22,7 @@ class HoneypotType extends AbstractType{
                 'style' => 'position: absolute; left: -500%; top: -500%;'
             ),
             'constraints' => array(
-                new Assert\Blank(
+                new Blank(
                     array(
                         'groups' => array(
                             Constraint::DEFAULT_GROUP,
@@ -37,6 +35,12 @@ class HoneypotType extends AbstractType{
             'error_bubbling' => true,
             'label' => false
         ));
+    }
+
+    // BC for SF < 2.7
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $this->configureOptions($resolver);
     }
 
     /**
@@ -52,5 +56,5 @@ class HoneypotType extends AbstractType{
     public function getName(){
         return 'rattler_honeypot';
     }
-	
+
 }

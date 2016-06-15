@@ -3,8 +3,8 @@
 namespace Rattler\HoneypotBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\Blank;
 
@@ -37,23 +37,17 @@ class HoneypotType extends AbstractType{
         ));
     }
 
-    // BC for SF < 2.7
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $this->configureOptions($resolver);
-    }
-
     /**
      * @return string
      */
     public function getParent(){
-        return 'text';
+        return TextType::class;
     }
 
     /**
      * @return string
      */
-    public function getName(){
+    public function getBlockPrefix(){
         return 'rattler_honeypot';
     }
 

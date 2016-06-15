@@ -1,5 +1,0 @@
-services:
-  rattler.form.type.honeypot:
-      class: Rattler\HoneypotBundle\Form\Type\HoneypotType
-      tags:
-          - { name: form.type, alias: rattler_honeypot }

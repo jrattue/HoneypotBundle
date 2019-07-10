@@ -40,14 +40,16 @@ class HoneypotType extends AbstractType{
     /**
      * @return string
      */
-    public function getParent(){
+    public function getParent()
+    {
         return TextType::class;
     }
 
     /**
      * @return string
      */
-    public function getBlockPrefix(){
+    public function getBlockPrefix()
+    {
         return 'rattler_honeypot';
     }
 
